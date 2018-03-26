@@ -124,9 +124,9 @@ export default {
 		{
 			fetch('https://mydatabase-9ed35.firebaseio.com/users/'+key+'.json', 
 			{
-				headers	: {'content-type': 'application/json'},
-				method 	: 'PUT',
-				body 		: JSON.stringify(values)
+				'headers'	: {'content-type': 'application/json'},
+				'method' 	: 'PUT',
+				'body' 		: JSON.stringify(values)
 			}).then(function(response){
 				response.json().then(function(response2){
 					callback(response2)
