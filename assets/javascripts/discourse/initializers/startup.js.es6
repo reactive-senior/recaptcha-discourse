@@ -6,6 +6,7 @@ export default {
 		document.body.style.display = 'none'
 		var tmc, $cookNum, $toUse, $timeNum, $firstTime, $secondTime, $reCAPTCHA, currentURL
 
+		tmc = null;
 		currentURL = ''
 		$firstTime = ''
 		$secondTime = ''
@@ -44,7 +45,6 @@ export default {
 						updateByKey(userIP.replace(/\./g, "-"), { visit: $cookNum, 'toUse': $toUse, 'timeNum': $timeNum }, function (result) {
 							console.log(result);
 						});
-
 						console.log('Update by key emitted.');
 
 						if($cookNum >= $timeNum && $reCAPTCHA.length > 0)
@@ -60,24 +60,27 @@ export default {
 							reCAPT.async = true
 							reCAPT.defer = true
 							document.body.appendChild(reCAPT)
-						}
-						
-						tmc = function(){
-							if (typeof grecaptcha !== 'undefined') {
-								if (grecaptcha.getResponse().length > 0) {
-									console.log('Response of reCAPTCHA: ' + grecaptcha.getResponse());
-									//user access token verified
-
-									//Verification is successful
-									$toUse = 1 - $toUse
-									$cookNum = 0
-									$timeNum = $timeNum == $firstTime ? $secondTime : $firstTime
-
-									//Update firebase
-									updateByKey(userIP.replace(/\./g, "-"), { visit: $cookNum, 'toUse': $toUse, 'timeNum': $timeNum }, function (result) {
-										location.reload()
-									})
+							console.log('Waiting response from recaptcha');
+							tmc = setInterval(function () {
+								if (typeof grecaptcha !== 'undefined') {
+									if (grecaptcha.getResponse().length > 0) {
+										console.log('Response of reCAPTCHA: ' + grecaptcha.getResponse());
+										//Verification is successful
+										$toUse = 1 - $toUse;
+										$cookNum = 0;
+										$timeNum = $timeNum == $firstTime ? $secondTime : $firstTime;
+										//Update firebase
+										updateByKey(userIP.replace(/\./g, "-"), { visit: $cookNum, 'toUse': $toUse, 'timeNum': $timeNum }, function (result) {
+											console.log(result);
+											location.reload();
+										});
+									}
 								}
+							}, 1000);
+						} else {
+							if (tmp !== null && $cookNum < $timeNum && $reCAPTCHA.length <= 0){
+								clearInterval(tmp);
+								tmp = null;
 							}
 						}
 					})
