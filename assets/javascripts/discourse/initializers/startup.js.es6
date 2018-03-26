@@ -39,9 +39,6 @@ export default {
 						//Update cookie numers
 						document.body.style.display = 'block'
 
-						// $cookNum = result.visit
-						// $timeNum = result.timeNum
-
 						console.log('Cookie after checking with firebase, cookNum, timeNum, toUse: ', $cookNum, $timeNum, $toUse);
 
 						updateByKey(userIP.replace(/\./g, "-"), { visit: $cookNum, 'toUse': $toUse, 'timeNum': $timeNum }, function (result) {
