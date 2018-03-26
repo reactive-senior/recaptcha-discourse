@@ -1,7 +1,7 @@
 en:
   site_settings:
-    discourse_captcha_enabled: "Do you want to enable the Discourse CAPTCHA plugin?"
-    discourse_captcha_first_max_visit_time: "What is the maximum visit before prompting the first CAPTCHA?"
-    discourse_captcha_second_max_visit_time: "What is the maximum visit before prompting the second CAPTCHA?"
-    discourse_captcha_site_key: "Please enter your reCAPTCHA Site Key"
+    discourse_captcha_enabled: "Enable Discourse CAPTCHA plugin."
+    discourse_captcha_first_max_visit_time: "Maximum visit before prompting the first CAPTCHA."
+    discourse_captcha_second_max_visit_time: "Maximum visit before prompting the second CAPTCHA."
+    discourse_captcha_site_key: "Recaptcha v2 Site Key"
 
