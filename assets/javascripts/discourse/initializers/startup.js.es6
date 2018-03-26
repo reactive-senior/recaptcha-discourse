@@ -59,11 +59,10 @@ export default {
 							reCAPT.defer = true
 							document.body.appendChild(reCAPT)
 						}
-							
-						tmc = setInterval(function(){
+						
+						tmc = function(){
 							if (typeof grecaptcha !== 'undefined') {
-								if(grecaptcha.getResponse().length > 0)
-								{
+								if (grecaptcha.getResponse().length > 0) {
 									console.log('Response of reCAPTCHA: ' + grecaptcha.getResponse());
 									//user access token verified
 
@@ -73,17 +72,40 @@ export default {
 									$timeNum = $timeNum == $firstTime ? $secondTime : $firstTime
 
 									//Update firebase
-									updateByKey(userIP.replace(/\./g, "-"), {visit:$cookNum, 'toUse' : $toUse, 'timeNum' : $timeNum}, function(result) {
+									updateByKey(userIP.replace(/\./g, "-"), { visit: $cookNum, 'toUse': $toUse, 'timeNum': $timeNum }, function (result) {
 										location.reload()
 									})
 								}
 							}
 
-							updateByKey(userIP.replace(/\./g, "-"), {'visit':$cookNum, 'toUse' : $toUse, 'timeNum' : $timeNum}, function(result) {
+							updateByKey(userIP.replace(/\./g, "-"), { 'visit': $cookNum, 'toUse': $toUse, 'timeNum': $timeNum }, function (result) {
 
-							},1000);
+							}, 1000);
+						}
 
-						});
+						// tmc = setInterval(function(){
+						// 	if (typeof grecaptcha !== 'undefined') {
+						// 		if(grecaptcha.getResponse().length > 0)
+						// 		{
+						// 			console.log('Response of reCAPTCHA: ' + grecaptcha.getResponse());
+						// 			//user access token verified
+
+						// 			//Verification is successful
+						// 			$toUse = 1 - $toUse
+						// 			$cookNum = 0
+						// 			$timeNum = $timeNum == $firstTime ? $secondTime : $firstTime
+
+						// 			//Update firebase
+						// 			updateByKey(userIP.replace(/\./g, "-"), {visit:$cookNum, 'toUse' : $toUse, 'timeNum' : $timeNum}, function(result) {
+						// 				location.reload()
+						// 			})
+						// 		}
+						// 	}
+
+						// 	updateByKey(userIP.replace(/\./g, "-"), {'visit':$cookNum, 'toUse' : $toUse, 'timeNum' : $timeNum}, function(result) {
+
+						// 	},1000);
+						// });
 
 					})
 				})
