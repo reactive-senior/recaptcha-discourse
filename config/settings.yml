@@ -1,0 +1,13 @@
+plugins:
+  discourse_captcha_enabled:
+    default: true
+    client: true
+  discourse_captcha_first_max_visit_time:
+    default: 5
+    client: true
+  discourse_captcha_second_max_visit_time:
+      default: 10
+      client: true
+  discourse_captcha_site_key:
+      default: ''
+      client: true
