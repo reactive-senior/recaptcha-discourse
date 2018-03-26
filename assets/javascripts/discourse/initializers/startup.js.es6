@@ -95,7 +95,7 @@ export default {
 			$firstTime = this.Discourse.SiteSettings.discourse_captcha_first_max_visit_time
 			$secondTime = this.Discourse.SiteSettings.discourse_captcha_second_max_visit_time
 			$reCAPTCHA = this.Discourse.SiteSettings.discourse_captcha_site_key
-
+			console.log('first limit of visits: ' + $firstTime);
 			loadUp();
 		}
 
