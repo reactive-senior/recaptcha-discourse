@@ -25,7 +25,7 @@ export default {
 					
 					findByKey(userIP.replace(/\./g, "-"), function(result)
 					{
-						console.log('Finding User at firebase, result:' + result);
+						console.log('Finding User at firebase, result:' + result.visit);
 
 						if(!result || result.error){
 							$cookNum = 1
