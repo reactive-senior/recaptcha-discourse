@@ -78,9 +78,9 @@ export default {
 								}
 							}, 1000);
 						} else {
-							if (tmp != undefined){
-								clearInterval(tmp);
-								tmp = null;
+							if (tmc != null){
+								clearInterval(tmc);
+								tmc = null;
 							}
 						}
 					})
