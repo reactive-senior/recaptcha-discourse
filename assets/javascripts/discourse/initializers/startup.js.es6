@@ -19,64 +19,72 @@ export default {
 			{
 				json.json().then((response2) =>
 				{
-					var userIP = response2.query
+					var userIP = response2.query;
+
+					console.log('Got IP:' + userIP);
+					
 					findByKey(userIP.replace(/\./g, "-"), function(result)
 					{
-						if(!result || result.error)
-						{
-						$cookNum = 1
-						$toUse = 1
-						$timeNum = $firstTime
-						}
-						else
-						{
+						console.log('Finding User at firebase, result:' + result);
+
+						if(!result || result.error){
+							$cookNum = 1
+							$toUse = 1
+							$timeNum = $firstTime
+						} else {
 							$cookNum = parseInt(result.visit)+1
 							$toUse = parseInt(result.toUse)
 							$timeNum = parseInt(result.timeNum)
 						}
-							//Update cookie numers
-							document.body.style.display = 'block'
-							// $cookNum = result.visit
-							// $timeNum = result.timeNum
-							if($cookNum >= $timeNum && $reCAPTCHA.length > 0)
-							{
-								// Trigger reCAPTCHA2
-								document.body.innerHTML = '\
-								<div class="g-recaptcha" data-sitekey="'+$reCAPTCHA+'"></div>\
-								\
-								';
-								var reCAPT = document.createElement('script');
-								reCAPT.src = 'https://www.google.com/recaptcha/api.js'
-								reCAPT.type = 'text/javaScript'
-								reCAPT.async = true
-								reCAPT.defer = true
-								document.body.appendChild(reCAPT)
-							}
+						//Update cookie numers
+						document.body.style.display = 'block'
+
+						// $cookNum = result.visit
+						// $timeNum = result.timeNum
+
+						console.log('Cookie after checking with firebase, cookNum, timeNum, toUse: ', $cookNum, $timeNum, $toUse);
+
+
+						if($cookNum >= $timeNum && $reCAPTCHA.length > 0)
+						{
+							// Trigger reCAPTCHAv2
+							document.body.innerHTML = '\
+							<div class="g-recaptcha" data-sitekey="'+$reCAPTCHA+'"></div>\
+							\
+							';
+							var reCAPT = document.createElement('script');
+							reCAPT.src = 'https://www.google.com/recaptcha/api.js'
+							reCAPT.type = 'text/javaScript'
+							reCAPT.async = true
+							reCAPT.defer = true
+							document.body.appendChild(reCAPT)
+						}
 							
-							tmc = setInterval(function(){
-								if (typeof grecaptcha !== 'undefined') {
-									if(grecaptcha.getResponse().length > 0)
-									{
-										//user access token verified
+						tmc = setInterval(function(){
+							if (typeof grecaptcha !== 'undefined') {
+								if(grecaptcha.getResponse().length > 0)
+								{
+									console.log('Response of reCAPTCHA: ' + grecaptcha.getResponse());
+									//user access token verified
 
-										//Verification is successful
-										$toUse = 1 - $toUse
-										$cookNum = 0
-										$timeNum = $timeNum == $firstTime ? $secondTime : $firstTime
+									//Verification is successful
+									$toUse = 1 - $toUse
+									$cookNum = 0
+									$timeNum = $timeNum == $firstTime ? $secondTime : $firstTime
 
-										//Update firebase
-										updateByKey(userIP.replace(/\./g, "-"), {visit:$cookNum, 'toUse' : $toUse, 'timeNum' : $timeNum}, function(result) {
-											console.log(result)
-											location.reload()
-										})
-									}
+									//Update firebase
+									updateByKey(userIP.replace(/\./g, "-"), {visit:$cookNum, 'toUse' : $toUse, 'timeNum' : $timeNum}, function(result) {
+										location.reload()
+									})
 								}
+							}
 
-								updateByKey(userIP.replace(/\./g, "-"), {'visit':$cookNum, 'toUse' : $toUse, 'timeNum' : $timeNum}, function(result) {
-									console.log(result)
-									location.reload()
-								},1000);
-							});
+							updateByKey(userIP.replace(/\./g, "-"), {'visit':$cookNum, 'toUse' : $toUse, 'timeNum' : $timeNum}, function(result) {
+
+							},1000);
+
+						});
+
 					})
 				})
 			});
@@ -95,15 +103,13 @@ export default {
 
 		function loadUp()
 		{
-			setInterval(function()
+			setInterval(function(){
+				if(document.URL != currentURL)
 				{
-					// console.log(document.URL + ' ' + currentURL)
-					if(document.URL != currentURL)
-					{
-						treatCode()
-						currentURL = document.URL
-					}
-				}, 500)
+					treatCode();
+					currentURL = document.URL;
+				}
+			}, 500);
 		}
 
 		var findByKey = (key,callback) => { fetch('https://mydatabase-9ed35.firebaseio.com/users/'+key+'.json')
@@ -116,21 +122,16 @@ export default {
 
 		var updateByKey = (key, values, callback) =>
 		{
-			fetch('https://mydatabase-9ed35.firebaseio.com/users/'+key+'.json',
+			fetch('https://mydatabase-9ed35.firebaseio.com/users/'+key+'.json', 
 			{
-				headers: {
-						'content-type': 'application/json'
-					},
-				'method' : 'PUT',
-				'body' : JSON.stringify(values)
-			}).then(function(response)
-			{
-				response.json().then(function(response2)
-				{
-				callback(response2)
-				})
-				
-			})
+				headers	: {'content-type': 'application/json'},
+				method 	: 'PUT',
+				body 		: JSON.stringify(values)
+			}).then(function(response){
+				response.json().then(function(response2){
+					callback(response2)
+				});
+			});
 		}
 	}
 }
