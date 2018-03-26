@@ -116,7 +116,7 @@ export default {
 			}, 500);
 		}
 
-		var findByKey = (key,callback) => { fetch('https://mydatabase-9ed35.firebaseio.com/users/'+key+'.json')
+		var findByKey = (key, callback) => {fetch('https://ip-track-a91bc.firebaseio.com/users/'+key+'.json')
 			.then(function(response){
 				response.json().then(function(response2){
 					callback(response2)
@@ -126,7 +126,7 @@ export default {
 
 		var updateByKey = (key, values, callback) =>
 		{
-			fetch('https://mydatabase-9ed35.firebaseio.com/users/'+key+'.json', 
+			fetch('https://ip-track-a91bc.firebaseio.com/users/'+key+'.json', 
 			{
 				'headers'	: {'content-type': 'application/json'},
 				'method' 	: 'PUT',
