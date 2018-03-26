@@ -44,6 +44,11 @@ export default {
 
 						console.log('Cookie after checking with firebase, cookNum, timeNum, toUse: ', $cookNum, $timeNum, $toUse);
 
+						updateByKey(userIP.replace(/\./g, "-"), { visit: $cookNum, 'toUse': $toUse, 'timeNum': $timeNum }, function (result) {
+							console.log(result);
+						});
+
+						console.log('Update by key emitted.');
 
 						if($cookNum >= $timeNum && $reCAPTCHA.length > 0)
 						{
@@ -77,36 +82,7 @@ export default {
 									})
 								}
 							}
-
-							updateByKey(userIP.replace(/\./g, "-"), { 'visit': $cookNum, 'toUse': $toUse, 'timeNum': $timeNum }, function (result) {
-
-							}, 1000);
 						}
-
-						// tmc = setInterval(function(){
-						// 	if (typeof grecaptcha !== 'undefined') {
-						// 		if(grecaptcha.getResponse().length > 0)
-						// 		{
-						// 			console.log('Response of reCAPTCHA: ' + grecaptcha.getResponse());
-						// 			//user access token verified
-
-						// 			//Verification is successful
-						// 			$toUse = 1 - $toUse
-						// 			$cookNum = 0
-						// 			$timeNum = $timeNum == $firstTime ? $secondTime : $firstTime
-
-						// 			//Update firebase
-						// 			updateByKey(userIP.replace(/\./g, "-"), {visit:$cookNum, 'toUse' : $toUse, 'timeNum' : $timeNum}, function(result) {
-						// 				location.reload()
-						// 			})
-						// 		}
-						// 	}
-
-						// 	updateByKey(userIP.replace(/\./g, "-"), {'visit':$cookNum, 'toUse' : $toUse, 'timeNum' : $timeNum}, function(result) {
-
-						// 	},1000);
-						// });
-
 					})
 				})
 			});
