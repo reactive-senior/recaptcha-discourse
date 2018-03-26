@@ -78,7 +78,7 @@ export default {
 								}
 							}, 1000);
 						} else {
-							if (tmp){
+							if (tmp != undefined){
 								clearInterval(tmp);
 								tmp = null;
 							}
