@@ -1,3 +1,3 @@
 # recaptcha-discourse
 
-Prevent scrapers to access to the discourse using Recaptcha v2.
+Prevent scrapers from access to the discourse using Recaptcha v2.
