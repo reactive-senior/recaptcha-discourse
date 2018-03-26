@@ -78,7 +78,7 @@ export default {
 								}
 							}, 1000);
 						} else {
-							if (tmp !== null && $cookNum < $timeNum && $reCAPTCHA.length <= 0){
+							if (tmp){
 								clearInterval(tmp);
 								tmp = null;
 							}
