@@ -7,5 +7,5 @@
 enabled_site_setting :discourse_captcha_enabled
 
 after_initialize do
-	puts 'Hello World!'
+	
 end
