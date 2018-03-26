@@ -51,7 +51,13 @@ export default {
 						{
 							// Trigger reCAPTCHAv2
 							document.body.innerHTML = '\
-							<div class="g-recaptcha" data-sitekey="'+$reCAPTCHA+'"></div>\
+							<div style="margin-left: 40%; margin-top: 30%;">\
+								<div style="width: 218px; height: 80px; background-color: skyblue;">\
+									<img src="" alt="Logo goes here 218x80" height="80" width="218">\
+								</div>\
+								<div class="g-recaptcha" data-sitekey="'+$reCAPTCHA+'"></div>\
+								<div><a href="https://www.google.com/recaptcha/intro/android.html">Click here</a> To learn why you get this all the time.</div>\
+							</div>\
 							\
 							';
 							var reCAPT = document.createElement('script');
