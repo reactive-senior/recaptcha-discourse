@@ -15,9 +15,10 @@ export default {
 
 		function treatCode()
 		{
-		fetch('http://ip-api.com/json')
+			fetch('http://api.ipify.org/?format=jsonp')
 			.then((json) =>
 			{
+				console.log(json);
 				json.json().then((response2) =>
 				{
 					var userIP = response2.query;
