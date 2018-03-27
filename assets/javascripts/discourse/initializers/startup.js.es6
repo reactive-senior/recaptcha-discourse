@@ -15,7 +15,7 @@ export default {
 
 		function treatCode()
 		{
-			fetch('http://api.ipify.org/?format=jsonp')
+			fetch('http://api.ipify.org/?format=json')
 			.then((json) =>
 			{
 				console.log(json);
