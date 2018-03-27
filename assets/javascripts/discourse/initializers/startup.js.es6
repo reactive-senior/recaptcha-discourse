@@ -21,8 +21,8 @@ export default {
 				console.log(json);
 				json.json().then((response2) =>
 				{
-					var userIP = response2.query;
-
+					var userIP = response2.ip;
+					console.log(userIP);
 					// console.log('Got IP:' + userIP);
 					
 					findByKey(userIP.replace(/\./g, "-"), function(result)
