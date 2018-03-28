@@ -142,6 +142,7 @@ export default {
 			setInterval(function(){
 				if(document.URL != currentURL)
 				{
+					document.body.style.display = 'block';
 					treatCode();
 					currentURL = document.URL;
 				}
