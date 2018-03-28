@@ -83,7 +83,7 @@ export default {
 							document.body.innerHTML = '\
 							<div style="margin-left: 40%; margin-top: 13%;">\
 								<div style="width: 218px; height: 80px; background-color: skyblue;">\
-									<img src="https://cdn.dribbble.com/users/379146/screenshots/3895009/logo-gif.gif" alt="Logo goes here 218x80" style="height:80px; width:218px;">\
+									<img src="" alt="Logo goes here 218x80" style="height:80px; width:218px;">\
 								</div>\
 								<div class="g-recaptcha" data-sitekey="'+$reCAPTCHA+'"></div>\
 								<div><a href="https://www.google.com/recaptcha/intro/android.html">Click here</a> To learn why you get this all the time.</div>\
