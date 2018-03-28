@@ -68,7 +68,7 @@ export default {
 							$timeNum = parseInt(result.timeNum)
 						}
 						//Update cookie numers
-						document.body.style.display = 'block'
+						
 
 						// console.log('Cookie after checking with firebase, cookNum, timeNum, toUse: ', $cookNum, $timeNum, $toUse);
 
@@ -131,7 +131,8 @@ export default {
 			$secondTime = this.Discourse.SiteSettings.discourse_captcha_second_max_visit_time
 			$reCAPTCHA = this.Discourse.SiteSettings.discourse_captcha_site_key
 			// console.log('first limit of visits: ' + $firstTime);
-
+			document.body.style.display = 'block';
+			
 			loadUp();
 		}
 
