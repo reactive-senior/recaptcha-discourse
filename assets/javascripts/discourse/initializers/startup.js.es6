@@ -45,6 +45,8 @@ export default {
 
 		function treatCode()
 		{
+			console.log('Treat Code function called.');
+			
 			fetch('http://149.56.134.234/ip.php')
 			.then((json) =>
 			{
@@ -126,7 +128,9 @@ export default {
 			});
 		}
 
-		window.onload = function()
+		document.getElementsByTagName("body")[0].addEventListener("load", init, false);
+
+		function init()
 		{
 			console.log('On load function called.');
 			document.body.style.display = 'block';
@@ -145,7 +149,6 @@ export default {
 			setInterval(function(){
 				if(document.URL != currentURL)
 				{
-					document.body.style.display = 'block';
 					treatCode();
 					currentURL = document.URL;
 				}
