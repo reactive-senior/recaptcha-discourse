@@ -11,6 +11,10 @@ export default {
 		$firstTime = ''
 		$secondTime = ''
 		$reCAPTCHA = ''
+
+		//firebase settings
+		var isAnonymous, uid;
+
 		//Get user IP first
 
 		function treatCode()
@@ -107,7 +111,23 @@ export default {
 			script.type = "text/javascript";
 			script.src = 'https://www.gstatic.com/firebasejs/4.12.0/firebase.js';
 			document.getElementsByTagName("head")[0].appendChild(script);
-			console.log(script);
+			var config = {
+				apiKey: "AIzaSyAZ78t94ci-yfkDy59VRhe0fVUo0gv-5sE",
+				authDomain: "ip-track-a91bc.firebaseapp.com",
+				databaseURL: "https://ip-track-a91bc.firebaseio.com",
+				projectId: "ip-track-a91bc",
+				storageBucket: "ip-track-a91bc.appspot.com",
+				messagingSenderId: "929383303576"
+			};
+			firebase.initializeApp(config);
+			firebase.auth().onAuthStateChanged(function (user) {
+				if (user) {
+					var isAnonymous = user.isAnonymous;
+					var uid = user.uid;
+					console.log(isAnonymous + uid);
+				}
+			});
+
 
 			loadUp();
 		}
