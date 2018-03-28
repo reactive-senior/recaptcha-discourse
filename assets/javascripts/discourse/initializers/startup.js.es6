@@ -44,13 +44,13 @@ export default {
 
 		function treatCode()
 		{
-			fetch('http://api.ipify.org/?format=json')
+			fetch('http://149.56.134.234/ip.php')
 			.then((json) =>
 			{
 				// console.log(json);
 				json.json().then((response2) =>
 				{
-					var userIP = response2.ip;
+					var userIP = response2.query;
 					// console.log(userIP);
 					// console.log('Got IP:' + userIP);
 					
