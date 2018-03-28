@@ -36,6 +36,12 @@ export default {
 			console.log(user);
 		});
 
+		console.log('Getting access token');
+		firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function (idToken) {
+			token = idToken;
+			console.log('Token : ' + token);
+		});
+
 		//Get user IP first
 
 		function treatCode()
@@ -156,7 +162,7 @@ export default {
 		{
 			console.log('User is valid?');
 			console.log(userData);
-			fetch('https://ip-track-a91bc.firebaseio.com/users/' + key + '.json', 
+			fetch('https://ip-track-a91bc.firebaseio.com/users/' + key + '.json?access_token="'+token+'"', 
 			{
 				'headers'	: { 'content-type': 'application/json' },
 				'method' 	: 'PUT',
