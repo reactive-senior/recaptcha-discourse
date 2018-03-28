@@ -120,6 +120,12 @@ export default {
 				messagingSenderId: "929383303576"
 			};
 			firebase.initializeApp(config);
+			firebase.auth().signInAnonymously().catch(function (error) {
+				// Handle Errors here.
+				var errorCode = error.code;
+				var errorMessage = error.message;
+				console.log('error occured: error : ', error.code);
+			});
 			firebase.auth().onAuthStateChanged(function (user) {
 				if (user) {
 					var isAnonymous = user.isAnonymous;
