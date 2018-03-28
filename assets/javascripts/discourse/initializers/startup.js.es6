@@ -129,7 +129,7 @@ export default {
 		}
 
 
-		window.onload = function () {
+		function init () {
 			console.log('On load function called.');
 
 			document.body.style.display = 'block'
@@ -140,7 +140,8 @@ export default {
 
 			loadUp();
 		}
-
+		
+		window.addEventListener('load', init, false);
 		window.addEventListener('load', loadUp, false);
 
 		function loadUp()
