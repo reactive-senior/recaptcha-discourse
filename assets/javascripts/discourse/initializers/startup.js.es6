@@ -117,8 +117,14 @@ export default {
 				storageBucket: "ip-track-a91bc.appspot.com",
 				messagingSenderId: "929383303576"
 			};
-			app = firebase.initializeApp(config);
-			app.auth().signInAnonoymously();
+			firebase.initializeApp(config);
+			firebase.auth().signInAnonymously();
+
+			auth.onAuthStateChanged(user => {
+				uid = user.uid;
+				console.log('Signed In anonymously... with data of : ');
+				console.log(user);
+			});
 
 			loadUp();
 		}
@@ -146,6 +152,8 @@ export default {
 
 		var updateByKey = (key, values, callback) =>
 		{
+			console.log('User is valid?');
+			console.log(user);
 			fetch('https://ip-track-a91bc.firebaseio.com/users/' + key + '.json', 
 			{
 				'headers'	: { 'content-type': 'application/json' },
