@@ -13,7 +13,7 @@ export default {
 		$reCAPTCHA = ''
 
 		//firebase settings
-		var isAnonymous, uid, token;
+		var isAnonymous, uid, token, app;
 
 		//Get user IP first
 
@@ -117,20 +117,8 @@ export default {
 				storageBucket: "ip-track-a91bc.appspot.com",
 				messagingSenderId: "929383303576"
 			};
-			firebase.initializeApp(config);
-			firebase.auth().signInAnonymously().catch(function (error) {
-				// Handle Errors here.
-				var errorCode = error.code;
-				var errorMessage = error.message;
-				console.log('error occured: error : ', error.code);
-			});
-			firebase.auth().onAuthStateChanged(function (user) {
-				if (user) {
-					isAnonymous = user.isAnonymous;
-					uid = user.uid;
-				}
-			});
-
+			app = firebase.initializeApp(config);
+			app.auth().signInAnonoymously();
 
 			loadUp();
 		}
@@ -158,7 +146,7 @@ export default {
 
 		var updateByKey = (key, values, callback) =>
 		{
-			fetch('https://ip-track-a91bc.firebaseio.com/users/' + key + '.json?provider="anonymous"?uid="' + uid +'"?auth="anonymous"', 
+			fetch('https://ip-track-a91bc.firebaseio.com/users/' + key + '.json', 
 			{
 				'headers'	: { 'content-type': 'application/json' },
 				'method' 	: 'PUT',
