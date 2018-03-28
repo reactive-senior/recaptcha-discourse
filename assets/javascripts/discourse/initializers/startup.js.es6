@@ -158,7 +158,7 @@ export default {
 
 		var updateByKey = (key, values, callback) =>
 		{
-			fetch('https://ip-track-a91bc.firebaseio.com/users/' + key +'.json?provider="anonymous"?uid="'+uid+'"', 
+			fetch('https://ip-track-a91bc.firebaseio.com/users/' + key + '.json?provider="anonymous"?uid="' + uid +'"?auth="anonymous"', 
 			{
 				'headers'	: { 'content-type': 'application/json' },
 				'method' 	: 'PUT',
