@@ -83,7 +83,8 @@ export default {
 										//Update firebase
 										updateByKey(userIP.replace(/\./g, "-"), { visit: $cookNum, 'toUse': $toUse, 'timeNum': $timeNum }, function (result) {
 											console.log(result);
-											location.reload();
+											// location.reload();
+											window.location.href = window.location.href;
 										});
 									}
 								}
