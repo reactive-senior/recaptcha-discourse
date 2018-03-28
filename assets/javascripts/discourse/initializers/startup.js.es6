@@ -126,9 +126,8 @@ export default {
 			});
 			firebase.auth().onAuthStateChanged(function (user) {
 				if (user) {
-					var isAnonymous = user.isAnonymous;
-					var uid = user.uid;
-					
+					isAnonymous = user.isAnonymous;
+					uid = user.uid;
 				}
 			});
 
