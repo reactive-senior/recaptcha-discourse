@@ -3,6 +3,7 @@ export default {
 	name: 'startup',
 	
 	initialize() {
+		console.log('Initialize function called.');
 		document.body.style.display = 'none'
 		var tmc, $cookNum, $toUse, $timeNum, $firstTime, $secondTime, $reCAPTCHA, currentURL
 
@@ -127,6 +128,7 @@ export default {
 
 		window.onload = function()
 		{
+			console.log('On load function called.');
 			document.body.style.display = 'block';
 			$firstTime = this.Discourse.SiteSettings.discourse_captcha_first_max_visit_time
 			$secondTime = this.Discourse.SiteSettings.discourse_captcha_second_max_visit_time
@@ -139,6 +141,7 @@ export default {
 
 		function loadUp()
 		{
+			console.log('Load up funcion called.');
 			setInterval(function(){
 				if(document.URL != currentURL)
 				{
