@@ -160,7 +160,7 @@ export default {
 		{
 			console.log('User is valid?');
 			console.log(userData);
-			fetch('https://ip-track-a91bc.firebaseio.com/users/' + key + '.json?auth="'+token+'"', 
+			fetch('https://ip-track-a91bc.firebaseio.com/users/' + key + '.json?auth='+token,
 			{
 				'headers'	: { 'content-type': 'application/json' },
 				'method' 	: 'PUT',
