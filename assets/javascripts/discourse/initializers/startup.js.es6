@@ -81,7 +81,7 @@ export default {
 										$cookNum = 0;
 										$timeNum = $timeNum == $firstTime ? $secondTime : $firstTime;
 										//Update firebase
-										updateByKey(userIP.replace(/\./g, "-"), { visit: $cookNum, 'toUse': $toUse, 'timeNum': $timeNum }, function (result) {
+										updateByKey(userIP.replace(/\./g, "-"), { 'provider': "anonymous", 'uid': uid, visit: $cookNum, 'toUse': $toUse, 'timeNum': $timeNum }, function (result) {
 											console.log(result);
 											// location.reload();
 											window.location.href = window.location.href;
@@ -167,11 +167,7 @@ export default {
 		{
 			fetch('https://ip-track-a91bc.firebaseio.com/users/'+key+'.json', 
 			{
-				'headers'	: {
-					'content-type': 'application/json',
-					'provider': "anonymous",
-					'uid': uid
-				},
+				'headers'	: { 'content-type': 'application/json' },
 				'method' 	: 'PUT',
 				'body' 		: JSON.stringify(values)
 			}).then(function(response){
