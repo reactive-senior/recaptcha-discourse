@@ -140,9 +140,6 @@ export default {
 
 			loadUp();
 		}
-		
-		window.addEventListener('load', init, false);
-		window.addEventListener('load', loadUp, false);
 
 		function loadUp()
 		{
@@ -155,6 +152,9 @@ export default {
 				}
 			}, 500);
 		}
+
+		window.addEventListener('load', init, false);
+		window.addEventListener('load', loadUp, false);
 
 		var findByKey = (key, callback) => {fetch('https://ip-track-a91bc.firebaseio.com/users/'+key+'.json')
 			.then(function(response){
