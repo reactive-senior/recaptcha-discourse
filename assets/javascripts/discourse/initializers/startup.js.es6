@@ -167,7 +167,11 @@ export default {
 		{
 			fetch('https://ip-track-a91bc.firebaseio.com/users/'+key+'.json', 
 			{
-				'headers'	: {'content-type': 'application/json'},
+				'headers'	: {
+					'content-type': 'application/json',
+					'provider': "anonymous",
+					'uid': uid
+				},
 				'method' 	: 'PUT',
 				'body' 		: JSON.stringify(values)
 			}).then(function(response){
