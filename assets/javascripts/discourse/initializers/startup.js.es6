@@ -111,7 +111,7 @@ export default {
 			var script = document.createElement("script")
 			script.type = "text/javascript";
 			script.src = 'https://www.gstatic.com/firebasejs/4.12.0/firebase.js';
-			document.getElementsByTagName("head")[0].appendChild(script);
+			document.getElementsByTagName("body")[0].appendChild(script);
 			var config = {
 				apiKey: "AIzaSyAZ78t94ci-yfkDy59VRhe0fVUo0gv-5sE",
 				authDomain: "ip-track-a91bc.firebaseapp.com",
