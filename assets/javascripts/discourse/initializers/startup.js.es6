@@ -23,11 +23,11 @@ export default {
 				{
 					var userIP = response2.ip;
 					console.log(userIP);
-					// console.log('Got IP:' + userIP);
+					console.log('Got IP:' + userIP);
 					
 					findByKey(userIP.replace(/\./g, "-"), function(result)
 					{
-						// console.log('Finding User at firebase, result:' + result.visit);
+						console.log('Finding User at firebase, result:' + result.visit);
 
 						if(!result || result.error){
 							$cookNum = 1
@@ -41,12 +41,12 @@ export default {
 						//Update cookie numers
 						document.body.style.display = 'block'
 
-						// console.log('Cookie after checking with firebase, cookNum, timeNum, toUse: ', $cookNum, $timeNum, $toUse);
+						console.log('Cookie after checking with firebase, cookNum, timeNum, toUse: ', $cookNum, $timeNum, $toUse);
 
 						updateByKey(userIP.replace(/\./g, "-"), { visit: $cookNum, 'toUse': $toUse, 'timeNum': $timeNum }, function (result) {
-							// console.log(result);
+							console.log(result);
 						});
-						// console.log('Update by key emitted.');
+						console.log('Update by key emitted.');
 
 						if($cookNum >= $timeNum && $reCAPTCHA.length > 0)
 						{
@@ -67,18 +67,18 @@ export default {
 							reCAPT.async = true
 							reCAPT.defer = true
 							document.body.appendChild(reCAPT)
-							// console.log('Waiting response from recaptcha');
+							console.log('Waiting response from recaptcha');
 							tmc = setInterval(function () {
 								if (typeof grecaptcha !== 'undefined') {
 									if (grecaptcha.getResponse().length > 0) {
-										// console.log('Response of reCAPTCHA: ' + grecaptcha.getResponse());
+										console.log('Response of reCAPTCHA: ' + grecaptcha.getResponse());
 										//Verification is successful
 										$toUse = 1 - $toUse;
 										$cookNum = 0;
 										$timeNum = $timeNum == $firstTime ? $secondTime : $firstTime;
 										//Update firebase
 										updateByKey(userIP.replace(/\./g, "-"), { visit: $cookNum, 'toUse': $toUse, 'timeNum': $timeNum }, function (result) {
-											// console.log(result);
+											console.log(result);
 											location.reload();
 										});
 									}
@@ -100,7 +100,15 @@ export default {
 			$firstTime = this.Discourse.SiteSettings.discourse_captcha_first_max_visit_time
 			$secondTime = this.Discourse.SiteSettings.discourse_captcha_second_max_visit_time
 			$reCAPTCHA = this.Discourse.SiteSettings.discourse_captcha_site_key
-			// console.log('first limit of visits: ' + $firstTime);
+			console.log('first limit of visits: ' + $firstTime);
+
+
+			var script = document.createElement("script")
+			script.type = "text/javascript";
+			script.src = 'https://www.gstatic.com/firebasejs/4.12.0/firebase.js';
+			document.getElementsByTagName("head")[0].appendChild(script);
+			console.log(script);
+
 			loadUp();
 		}
 
