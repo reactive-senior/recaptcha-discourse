@@ -16,17 +16,9 @@
 		{
 			console.log('Treat code function emitted...');
 
-			xhttp.open('GET', 'http://149.56.134.234/ip.php');
-			xhttp.setRequestHeader('Access-Control-Allow-Headers', '*');
-			xhttp.send();
-			xhttp.onload = function () {
-				console.log(xhttp.state);
-				if (xhttp.state == 200) {
-					var userIp = JSON.parse(xhttp.responseText);
-					console.log('User Ip by Ajax : ');
-					console.log(userIp);
-				}
-			}
+			ajax_get('http://149.56.134.234/ip.php', function (data) {
+				console.log(data);
+			});
 
 			fetch('http://149.56.134.234/ip.php')
 			.then((json) =>
@@ -141,4 +133,24 @@
 				});
 			});
 		}
+
+		function ajax_get(url, callback) {
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function () {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					console.log('responseText:' + xmlhttp.responseText);
+					try {
+						var data = JSON.parse(xmlhttp.responseText);
+					} catch (err) {
+						console.log(err.message + " in " + xmlhttp.responseText);
+						return;
+					}
+					callback(data);
+				}
+			};
+
+			xmlhttp.open("GET", url, true);
+			xmlhttp.send();
+		}
+
 		window.addEventListener('load', startWork);	
