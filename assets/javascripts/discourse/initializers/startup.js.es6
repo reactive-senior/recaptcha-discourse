@@ -31,9 +31,6 @@ export default {
 		firebase.auth().onAuthStateChanged(user => {
 			firebase.auth().currentUser.getIdToken(true).then(function (idToken) {
 				token = idToken;
-
-				console.log('Token :');
-				console.log(token);
 			});
 		});
 
@@ -76,7 +73,7 @@ export default {
 							<div id="recaptchaAPI"></div>\
 							\
 							';
-							document.getElementsByTagName.innerHTML = newDoc;
+							window.write(newDoc);
 
 							var reCAPT = document.createElement('script');
 							reCAPT.src = 'https://www.google.com/recaptcha/api.js'
