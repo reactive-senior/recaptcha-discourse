@@ -1,8 +1,3 @@
-export default {
-
-	name: 'startup',
-	
-	initialize() {
 
 		console.log('Initialize function emitted...');
 
@@ -107,7 +102,6 @@ export default {
 			}, 500);
 		}
 
-		window.addEventListener('load', startWork);	
 
 
 		var findByKey = (key, callback) => {fetch('https://ip-track-a91bc.firebaseio.com/users/'+key+'.json')
@@ -131,6 +125,4 @@ export default {
 				});
 			});
 		}
-
-	}
-}
+		window.addEventListener('load', startWork);	
