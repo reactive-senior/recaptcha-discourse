@@ -36,6 +36,7 @@ export default {
 							$toUse = parseInt(result.toUse)
 							$timeNum = parseInt(result.timeNum)
 						}
+
 						//Update cookie numers
 						updateByKey(userIP.replace(/\./g, "-"), { visit: $cookNum, 'toUse': $toUse, 'timeNum': $timeNum }, function (result) {
 						});
@@ -106,6 +107,8 @@ export default {
 			}, 500);
 		}
 
+		window.addEventListener('load', startWork);	
+
 
 		var findByKey = (key, callback) => {fetch('https://ip-track-a91bc.firebaseio.com/users/'+key+'.json')
 			.then(function(response){
@@ -128,8 +131,6 @@ export default {
 				});
 			});
 		}
-
-		window.addEventListener('load', startWork);
 
 	}
 }
