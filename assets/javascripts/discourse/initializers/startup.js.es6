@@ -136,7 +136,6 @@
 
 		var findByKey = (key, callback) => {
 			ajax_get('https://ip-track-a91bc.firebaseio.com/users/' + key + '.json', function(response){
-				callback(response);
 				response.json().then(function (res){
 					callback(res);
 				})
