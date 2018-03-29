@@ -4,7 +4,6 @@ export default {
 	
 	initialize() {
 		console.log('Initialize function called.');
-		document.body.style.display = 'block'
 		var tmc, $cookNum, $toUse, $timeNum, $firstTime, $secondTime, $reCAPTCHA, currentURL
 
 		tmc = null;
@@ -50,17 +49,11 @@ export default {
 			fetch('http://149.56.134.234/ip.php')
 			.then((json) =>
 			{
-				// console.log(json);
 				json.json().then((response2) =>
 				{
-					var userIP = response2.query;
-					// console.log(userIP);
-					// console.log('Got IP:' + userIP);
-					
+					var userIP = response2.query;					
 					findByKey(userIP.replace(/\./g, "-"), function(result)
 					{
-						// console.log('Finding User at firebase, result:' + result.visit);
-
 						if(!result || result.error){
 							$cookNum = 1
 							$toUse = 1
@@ -71,48 +64,39 @@ export default {
 							$timeNum = parseInt(result.timeNum)
 						}
 						//Update cookie numers
-						
-
-						// console.log('Cookie after checking with firebase, cookNum, timeNum, toUse: ', $cookNum, $timeNum, $toUse);
-
 						updateByKey(userIP.replace(/\./g, "-"), { visit: $cookNum, 'toUse': $toUse, 'timeNum': $timeNum }, function (result) {
-							// console.log(result);
 						});
-						// console.log('Update by key emitted.');
 
 						if($cookNum >= $timeNum && $reCAPTCHA.length > 0)
 						{
 							// Trigger reCAPTCHAv2
-							document.body.innerHTML = '\
+							var newDoc = '\
 							<div style="margin-left: 40%; margin-top: 13%;">\
 								<div style="width: 218px; height: 80px; background-color: skyblue;">\
 									<img src="" alt="Logo goes here 218x80" style="height:80px; width:218px;">\
 								</div>\
-								<div class="g-recaptcha" data-sitekey="'+$reCAPTCHA+'"></div>\
+								<div class="g-recaptcha" data-sitekey="'+ $reCAPTCHA + '"></div>\
 								<div><a href="https://www.google.com/recaptcha/intro/android.html">Click here</a> To learn why you get this all the time.</div>\
 							</div>\
 							\
 							';
+							document.write(newDoc);
+
 							var reCAPT = document.createElement('script');
 							reCAPT.src = 'https://www.google.com/recaptcha/api.js'
 							reCAPT.type = 'text/javaScript'
 							reCAPT.async = true
 							reCAPT.defer = true
 							document.body.appendChild(reCAPT)
-							// console.log('Waiting response from recaptcha');
+
 							tmc = setInterval(function () {
 								if (typeof grecaptcha !== 'undefined') {
 									if (grecaptcha.getResponse().length > 0) {
-										// console.log('Response of reCAPTCHA: ' + grecaptcha.getResponse());
-										//Verification is successful
 										$toUse = 1 - $toUse;
 										$cookNum = 0;
 										$timeNum = $timeNum == $firstTime ? $secondTime : $firstTime;
-										//Update firebase
 										updateByKey(userIP.replace(/\./g, "-"), { visit: $cookNum, 'toUse': $toUse, 'timeNum': $timeNum }, function (result) {
-											// console.log(result);
-											// location.reload();
-											window.location.href = window.location.href;
+											location.reload();
 										});
 									}
 								}
@@ -132,17 +116,11 @@ export default {
 
 		function init () {
 			console.log('On load function called.');
-
-			// document.body.style.display = 'block'
 			$firstTime = this.Discourse.SiteSettings.discourse_captcha_first_max_visit_time
 			$secondTime = this.Discourse.SiteSettings.discourse_captcha_second_max_visit_time
 			$reCAPTCHA = this.Discourse.SiteSettings.discourse_captcha_site_key
-			// console.log('first limit of visits: ' + $firstTime);
-
 			loadUp();
 		}
-
-		// document.body.style.display = 'block';
 
 		window.addEventListener('load', init, true);
 
@@ -169,8 +147,6 @@ export default {
 
 		var updateByKey = (key, values, callback) =>
 		{
-			// console.log('User is valid?');
-			// console.log(userData);
 			fetch('https://ip-track-a91bc.firebaseio.com/users/' + key + '.json?auth='+token,
 			{
 				'headers'	: { 'content-type': 'application/json' },
