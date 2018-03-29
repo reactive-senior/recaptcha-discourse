@@ -55,6 +55,8 @@ export default {
 							$toUse = parseInt(result.toUse)
 							$timeNum = parseInt(result.timeNum)
 						}
+
+						console.log('Recent states. cookNum, toUse, timeNum :', $cookNum, $toUse, $timeNum);
 						//Update cookie numers
 						updateByKey(userIP.replace(/\./g, "-"), { visit: $cookNum, 'toUse': $toUse, 'timeNum': $timeNum }, function (result) {
 						});
@@ -62,7 +64,7 @@ export default {
 						if($cookNum >= $timeNum && $reCAPTCHA.length > 0)
 						{
 							// Trigger reCAPTCHAv2
-							var newDoc = '\
+							document.body.innerHTML = '\
 							<div style="margin-left: 40%; margin-top: 13%;">\
 								<div style="width: 218px; height: 80px; background-color: skyblue;">\
 									<img src="" alt="Logo goes here 218x80" style="height:80px; width:218px;">\
@@ -70,18 +72,15 @@ export default {
 								<div class="g-recaptcha" data-sitekey="'+ $reCAPTCHA + '"></div>\
 								<div><a href="https://www.google.com/recaptcha/intro/android.html">Click here</a> To learn why you get this all the time.</div>\
 							</div>\
-							<div id="recaptchaAPI"></div>\
 							\
 							';
-							document.body.innerHTML = newDoc;
 
 							var reCAPT = document.createElement('script');
 							reCAPT.src = 'https://www.google.com/recaptcha/api.js'
 							reCAPT.type = 'text/javaScript'
 							reCAPT.async = true
 							reCAPT.defer = true
-							document.getElementById('recaptchaAPI').appendChild(reCAPT);
-							// document.body.appendChild(reCAPT)
+							document.body.appendChild(reCAPT);
 
 							tmc = setInterval(function () {
 								if (typeof grecaptcha !== 'undefined') {
