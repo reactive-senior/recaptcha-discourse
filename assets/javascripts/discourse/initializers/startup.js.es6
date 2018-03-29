@@ -4,7 +4,7 @@ export default {
 	
 	initialize() {
 		console.log('Initialize function called.');
-		// document.body.style.display = 'none'
+		document.body.style.display = 'block'
 		var tmc, $cookNum, $toUse, $timeNum, $firstTime, $secondTime, $reCAPTCHA, currentURL
 
 		tmc = null;
