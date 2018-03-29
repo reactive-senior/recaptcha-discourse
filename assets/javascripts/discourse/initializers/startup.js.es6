@@ -151,7 +151,7 @@ export default {
 			});
 		}
 
-		window.addEventListener('load', startWork());
+		window.addEventListener('load', startWork);
 
 	}	
 
