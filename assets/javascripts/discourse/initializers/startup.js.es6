@@ -73,7 +73,7 @@ export default {
 							<div id="recaptchaAPI"></div>\
 							\
 							';
-							document.write(newDoc);
+							document.body.innerHTML = newDoc;
 
 							var reCAPT = document.createElement('script');
 							reCAPT.src = 'https://www.google.com/recaptcha/api.js'
