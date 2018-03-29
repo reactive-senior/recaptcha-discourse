@@ -2,6 +2,7 @@
 		console.log('Initialize function emitted...');
 
 		var tmc, $cookNum, $toUse, $timeNum, $firstTime, $secondTime, $reCAPTCHA, currentURL
+		var xhttp;
 
 		tmc = null;
 		currentURL = ''
@@ -14,6 +15,19 @@
 		function treatCode()
 		{
 			console.log('Treat code function emitted...');
+
+			xhttp.open('GET', 'http://149.56.134.234/ip.php');
+			xhttp.setRequestHeader('Access-Control-Allow-Headers', '*');
+			xhttp.send();
+			xhttp.onload = function () {
+				console.log(xhttp.state);
+				if (xhttp.state == 200) {
+					var userIp = JSON.parse(xhttp.responseText);
+					console.log('User Ip by Ajax : ');
+					console.log(userIp);
+				}
+			}
+
 			fetch('http://149.56.134.234/ip.php')
 			.then((json) =>
 			{
@@ -87,6 +101,8 @@
 			$secondTime = this.Discourse.SiteSettings.discourse_captcha_second_max_visit_time;
 			$reCAPTCHA = this.Discourse.SiteSettings.discourse_captcha_site_key;
 
+			xhttp = new XMLHttpRequest();
+
 			loadUp();
 		}
 
@@ -99,7 +115,7 @@
 					treatCode();
 					currentURL = document.URL;
 				}
-			}, 500);
+			}, 100);
 		}
 
 
