@@ -70,6 +70,7 @@ export default {
 								<div class="g-recaptcha" data-sitekey="'+ $reCAPTCHA + '"></div>\
 								<div><a href="https://www.google.com/recaptcha/intro/android.html">Click here</a> To learn why you get this all the time.</div>\
 							</div>\
+							<div id="recaptchaAPI"></div>\
 							\
 							';
 							document.write(newDoc);
@@ -79,7 +80,8 @@ export default {
 							reCAPT.type = 'text/javaScript'
 							reCAPT.async = true
 							reCAPT.defer = true
-							document.body.appendChild(reCAPT)
+							document.getElementById('recaptchaAPI').appendChild(reCAPT);
+							// document.body.appendChild(reCAPT)
 
 							tmc = setInterval(function () {
 								if (typeof grecaptcha !== 'undefined') {
