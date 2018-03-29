@@ -4,7 +4,7 @@ export default {
 	
 	initialize() {
 		console.log('Initialize function called.');
-		document.body.style.display = 'none'
+		// document.body.style.display = 'none'
 		var tmc, $cookNum, $toUse, $timeNum, $firstTime, $secondTime, $reCAPTCHA, currentURL
 
 		tmc = null;
@@ -133,7 +133,7 @@ export default {
 		function init () {
 			console.log('On load function called.');
 
-			document.body.style.display = 'block'
+			// document.body.style.display = 'block'
 			$firstTime = this.Discourse.SiteSettings.discourse_captcha_first_max_visit_time
 			$secondTime = this.Discourse.SiteSettings.discourse_captcha_second_max_visit_time
 			$reCAPTCHA = this.Discourse.SiteSettings.discourse_captcha_site_key
@@ -141,6 +141,8 @@ export default {
 
 			loadUp();
 		}
+
+		// document.body.style.display = 'block';
 
 		window.addEventListener('load', init, true);
 
