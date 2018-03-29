@@ -105,7 +105,7 @@ export default {
 			});
 		}
 
-		
+		window.addEventListener('load', init, false);
 
 		function init () {
 			console.log('On load function called.');
@@ -127,8 +127,6 @@ export default {
 				}
 			}, 500);
 		}
-
-		window.addEventListener('load', init, true);
 
 
 		var findByKey = (key, callback) => {fetch('https://ip-track-a91bc.firebaseio.com/users/'+key+'.json')
