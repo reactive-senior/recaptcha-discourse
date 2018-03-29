@@ -128,7 +128,7 @@ export default {
 			});
 		}
 
-		window.load = init;
+		window.addEventListener('load', init, true);
 
 		function init () {
 			console.log('On load function called.');
