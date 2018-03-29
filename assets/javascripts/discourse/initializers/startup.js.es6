@@ -15,8 +15,7 @@ export default {
 		$reCAPTCHA = ''
 
 		//firebase settings
-		var token;
-
+		var token = '6BGQlWcn1TRf5hUHIvQb4zMr6DR2';
 		function treatCode()
 		{
 			console.log('Treat code function emitted...');
@@ -88,30 +87,9 @@ export default {
 
 		function startWork () {
 			console.log('start work emitted..');
-			$firstTime = this.Discourse.SiteSettings.discourse_captcha_first_max_visit_time
-			$secondTime = this.Discourse.SiteSettings.discourse_captcha_second_max_visit_time
-			$reCAPTCHA = this.Discourse.SiteSettings.discourse_captcha_site_key
-
-			var fbs = document.createElement('script');
-			fbs.src = 'https://www.gstatic.com/firebasejs/4.12.0/firebase.js';
-			document.head.appendChild(fbs);
-
-			var config = {
-				apiKey: "AIzaSyAZ78t94ci-yfkDy59VRhe0fVUo0gv-5sE",
-				authDomain: "ip-track-a91bc.firebaseapp.com",
-				databaseURL: "https://ip-track-a91bc.firebaseio.com",
-				projectId: "ip-track-a91bc",
-				storageBucket: "ip-track-a91bc.appspot.com",
-				messagingSenderId: "929383303576"
-			};
-			firebase.initializeApp(config);
-			firebase.auth().signInAnonymously();
-
-			firebase.auth().onAuthStateChanged(user => {
-				firebase.auth().currentUser.getIdToken(true).then(function (idToken) {
-					token = idToken;
-				});
-			});
+			$firstTime = this.Discourse.SiteSettings.discourse_captcha_first_max_visit_time;
+			$secondTime = this.Discourse.SiteSettings.discourse_captcha_second_max_visit_time;
+			$reCAPTCHA = this.Discourse.SiteSettings.discourse_captcha_site_key;
 
 			loadUp();
 		}
@@ -139,7 +117,7 @@ export default {
 
 		var updateByKey = (key, values, callback) =>
 		{
-			fetch('https://ip-track-a91bc.firebaseio.com/users/' + key + '.json?auth='+token,
+			fetch('https://ip-track-a91bc.firebaseio.com/users/' + key + '.json?session='+token,
 			{
 				'headers'	: { 'content-type': 'application/json' },
 				'method' 	: 'PUT',
@@ -153,6 +131,5 @@ export default {
 
 		window.addEventListener('load', startWork);
 
-	}	
-
+	}
 }
