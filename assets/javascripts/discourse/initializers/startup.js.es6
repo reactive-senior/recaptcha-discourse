@@ -128,7 +128,7 @@ export default {
 			});
 		}
 
-		window.addEventListener('load', init, true);
+		
 
 		function init () {
 			console.log('On load function called.');
@@ -141,6 +141,8 @@ export default {
 
 			loadUp();
 		}
+
+		window.addEventListener('load', init, true);
 
 		function loadUp()
 		{
