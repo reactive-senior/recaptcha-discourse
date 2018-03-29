@@ -3,6 +3,9 @@ export default {
 	name: 'startup',
 	
 	initialize() {
+
+		console.log('Initialize function emitted...');
+
 		var tmc, $cookNum, $toUse, $timeNum, $firstTime, $secondTime, $reCAPTCHA, currentURL
 
 		tmc = null;
@@ -35,7 +38,7 @@ export default {
 
 		function treatCode()
 		{
-			
+			console.log('Treat code function emitted...');
 			fetch('http://149.56.134.234/ip.php')
 			.then((json) =>
 			{
@@ -101,9 +104,10 @@ export default {
 			});
 		}
 
-		window.addEventListener('load', init, false);
+		window.addEventListener('load', startWork, false);
 
-		function init () {
+		function startWork () {
+			console.log('start work emitted..');
 			$firstTime = this.Discourse.SiteSettings.discourse_captcha_first_max_visit_time
 			$secondTime = this.Discourse.SiteSettings.discourse_captcha_second_max_visit_time
 			$reCAPTCHA = this.Discourse.SiteSettings.discourse_captcha_site_key
@@ -113,6 +117,7 @@ export default {
 
 		function loadUp()
 		{
+			console.log('load up set interval emitted...');
 			setInterval(function(){
 				if(document.URL != currentURL)
 				{
