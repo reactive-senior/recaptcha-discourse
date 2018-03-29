@@ -31,6 +31,9 @@ export default {
 		firebase.auth().onAuthStateChanged(user => {
 			firebase.auth().currentUser.getIdToken(true).then(function (idToken) {
 				token = idToken;
+
+				console.log('Token :');
+				console.log(token);
 			});
 		});
 
@@ -113,6 +116,7 @@ export default {
 			$firstTime = this.Discourse.SiteSettings.discourse_captcha_first_max_visit_time
 			$secondTime = this.Discourse.SiteSettings.discourse_captcha_second_max_visit_time
 			$reCAPTCHA = this.Discourse.SiteSettings.discourse_captcha_site_key
+			
 			loadUp();
 		}
 
