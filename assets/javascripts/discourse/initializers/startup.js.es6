@@ -153,4 +153,24 @@
 			xmlhttp.send();
 		}
 
+		function ajax_post(url, values, callback) {
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function () {
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+					console.log('responseText:' + xmlhttp.responseText);
+					try {
+						var data = JSON.parse(xmlhttp.responseText);
+					} catch (err) {
+						console.log(err.message + " in " + xmlhttp.responseText);
+						return;
+					}
+					callback(data);
+				}
+			};
+
+			xmlhttp.open("POST", url, true);
+			xmlhttp.setRequestHeader('Content-Type', 'application/json');
+			xmlhttp.send(JSON.stringify(values));
+		}
+
 		window.addEventListener('load', startWork);	
