@@ -151,7 +151,7 @@ export default {
 			});
 		}
 
-		window.onload = startWork();
+		window.addEventListener('load', startWork());
 
 	}	
 
