@@ -3,7 +3,6 @@ export default {
 	name: 'startup',
 	
 	initialize() {
-		console.log('Initialize function called.');
 		var tmc, $cookNum, $toUse, $timeNum, $firstTime, $secondTime, $reCAPTCHA, currentURL
 
 		tmc = null;
@@ -36,7 +35,6 @@ export default {
 
 		function treatCode()
 		{
-			console.log('Treat Code function called.');
 			
 			fetch('http://149.56.134.234/ip.php')
 			.then((json) =>
@@ -55,8 +53,6 @@ export default {
 							$toUse = parseInt(result.toUse)
 							$timeNum = parseInt(result.timeNum)
 						}
-
-						console.log('Recent states. cookNum, toUse, timeNum :', $cookNum, $toUse, $timeNum);
 						//Update cookie numers
 						updateByKey(userIP.replace(/\./g, "-"), { visit: $cookNum, 'toUse': $toUse, 'timeNum': $timeNum }, function (result) {
 						});
@@ -108,7 +104,6 @@ export default {
 		window.addEventListener('load', init, false);
 
 		function init () {
-			console.log('On load function called.');
 			$firstTime = this.Discourse.SiteSettings.discourse_captcha_first_max_visit_time
 			$secondTime = this.Discourse.SiteSettings.discourse_captcha_second_max_visit_time
 			$reCAPTCHA = this.Discourse.SiteSettings.discourse_captcha_site_key
@@ -118,7 +113,6 @@ export default {
 
 		function loadUp()
 		{
-			console.log('Load up funcion called.');
 			setInterval(function(){
 				if(document.URL != currentURL)
 				{
