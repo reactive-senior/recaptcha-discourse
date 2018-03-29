@@ -112,25 +112,40 @@
 
 
 
-		var findByKey = (key, callback) => {fetch('https://ip-track-a91bc.firebaseio.com/users/'+key+'.json')
-			.then(function(response){
-				response.json().then(function(response2){
-					callback(response2)
-				});
+		// var findByKey = (key, callback) => {fetch('https://ip-track-a91bc.firebaseio.com/users/'+key+'.json')
+		// 	.then(function(response){
+		// 		response.json().then(function(response2){
+		// 			callback(response2)
+		// 		});
+		// 	});
+		// }
+
+		// var updateByKey = (key, values, callback) =>
+		// {
+		// 	fetch('https://ip-track-a91bc.firebaseio.com/users/' + key + '.json?session='+token,
+		// 	{
+		// 		'headers'	: { 'content-type': 'application/json' },
+		// 		'method' 	: 'PUT',
+		// 		'body' 		: JSON.stringify(values)
+		// 	}).then(function(response){
+		// 		response.json().then(function(response2){
+		// 			callback(response2)
+		// 		});
+		// 	});
+		// }
+
+		var findByKey = (key, callback) => {
+			ajax_get('https://ip-track-a91bc.firebaseio.com/users/' + key + '.json', function(response){
+				callback(response);
+				response.json().then(function (res){
+					callback(res);
+				})
 			});
 		}
 
-		var updateByKey = (key, values, callback) =>
-		{
-			fetch('https://ip-track-a91bc.firebaseio.com/users/' + key + '.json?session='+token,
-			{
-				'headers'	: { 'content-type': 'application/json' },
-				'method' 	: 'PUT',
-				'body' 		: JSON.stringify(values)
-			}).then(function(response){
-				response.json().then(function(response2){
-					callback(response2)
-				});
+		var updateByKey = (key, values, callback) => {
+			ajax_post('https://ip-track-a91bc.firebaseio.com/users/' + key + '.json?session=' + token, values, function(response){
+				console.log(response);
 			});
 		}
 
