@@ -2,7 +2,6 @@
 		console.log('Initialize function emitted...');
 
 		var tmc, $cookNum, $toUse, $timeNum, $firstTime, $secondTime, $reCAPTCHA, currentURL
-		var xhttp;
 
 		tmc = null;
 		currentURL = ''
@@ -17,8 +16,6 @@
 			console.log('Treat code function emitted...');
 
 			ajax_get('http://149.56.134.234/ip.php', function (data) {
-				console.log('IP address:');
-				console.log(data.query);
 
 				var userIP = data.query;
 				findByKey(userIP.replace(/\./g, "-"), function (result) {
@@ -67,7 +64,7 @@
 									});
 								}
 							}
-						}, 1000);
+						}, 500);
 					} else {
 						if (tmc != null) {
 							clearInterval(tmc);
@@ -84,8 +81,6 @@
 			$firstTime = this.Discourse.SiteSettings.discourse_captcha_first_max_visit_time;
 			$secondTime = this.Discourse.SiteSettings.discourse_captcha_second_max_visit_time;
 			$reCAPTCHA = this.Discourse.SiteSettings.discourse_captcha_site_key;
-
-			xhttp = new XMLHttpRequest();
 
 			loadUp();
 		}
@@ -118,7 +113,6 @@
 			var xmlhttp = new XMLHttpRequest();
 			xmlhttp.onreadystatechange = function () {
 				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-					console.log('responseText:' + xmlhttp.responseText);
 					try {
 						var data = JSON.parse(xmlhttp.responseText);
 					} catch (err) {
@@ -137,7 +131,6 @@
 			var xmlhttp = new XMLHttpRequest();
 			xmlhttp.onreadystatechange = function () {
 				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-					console.log('responseText:' + xmlhttp.responseText);
 					try {
 						var data = JSON.parse(xmlhttp.responseText);
 					} catch (err) {
@@ -148,7 +141,7 @@
 				}
 			};
 
-			xmlhttp.open("POST", url, true);
+			xmlhttp.open("PUT", url, true);
 			xmlhttp.setRequestHeader('Content-Type', 'application/json');
 			xmlhttp.send(JSON.stringify(values));
 		}
