@@ -91,7 +91,7 @@
 				treatCode();
 				currentURL = document.URL;
 			}
-		}, 10);
+		}, 100);
 	}
 
 	var findByKey = (key, callback) => {
