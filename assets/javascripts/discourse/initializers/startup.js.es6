@@ -81,9 +81,11 @@
 		$reCAPTCHA = this.Discourse.SiteSettings.discourse_captcha_site_key;
 
 		$isEnabled = this.Discourse.SiteSettings.discourse_captcha_enabled;
-		
+
 		if($isEnabled)
 			loadUp();
+		else
+			document.body.style.display = 'block';
 	}
 
 	function loadUp()
