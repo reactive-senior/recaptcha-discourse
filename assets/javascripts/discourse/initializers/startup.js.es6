@@ -17,35 +17,28 @@
 			console.log('Treat code function emitted...');
 
 			ajax_get('http://149.56.134.234/ip.php', function (data) {
-				console.log(data);
-			});
+				console.log('IP address:');
+				console.log(data.query);
 
-			fetch('http://149.56.134.234/ip.php')
-			.then((json) =>
-			{
-				json.json().then((response2) =>
-				{
-					var userIP = response2.query;					
-					findByKey(userIP.replace(/\./g, "-"), function(result)
-					{
-						if(!result || result.error){
-							$cookNum = 1
-							$toUse = 1
-							$timeNum = $firstTime
-						} else {
-							$cookNum = parseInt(result.visit)+1
-							$toUse = parseInt(result.toUse)
-							$timeNum = parseInt(result.timeNum)
-						}
+				var userIP = data.query;
+				findByKey(userIP.replace(/\./g, "-"), function (result) {
+					if (!result || result.error) {
+						$cookNum = 1
+						$toUse = 1
+						$timeNum = $firstTime
+					} else {
+						$cookNum = parseInt(result.visit) + 1
+						$toUse = parseInt(result.toUse)
+						$timeNum = parseInt(result.timeNum)
+					}
 
-						//Update cookie numers
-						updateByKey(userIP.replace(/\./g, "-"), { visit: $cookNum, 'toUse': $toUse, 'timeNum': $timeNum }, function (result) {
-						});
+					//Update cookie numers
+					updateByKey(userIP.replace(/\./g, "-"), { visit: $cookNum, 'toUse': $toUse, 'timeNum': $timeNum }, function (result) {
+					});
 
-						if($cookNum >= $timeNum && $reCAPTCHA.length > 0)
-						{
-							// Trigger reCAPTCHAv2
-							document.body.innerHTML = '\
+					if ($cookNum >= $timeNum && $reCAPTCHA.length > 0) {
+						// Trigger reCAPTCHAv2
+						document.body.innerHTML = '\
 							<div style="margin-left: 40%; margin-top: 13%;">\
 								<div style="width: 218px; height: 80px; background-color: skyblue;">\
 									<img src="" alt="Logo goes here 218x80" style="height:80px; width:218px;">\
@@ -56,32 +49,31 @@
 							\
 							';
 
-							var reCAPT = document.createElement('script');
-							reCAPT.src = 'https://www.google.com/recaptcha/api.js'
-							reCAPT.type = 'text/javaScript'
-							reCAPT.async = true
-							reCAPT.defer = true
-							document.body.appendChild(reCAPT);
+						var reCAPT = document.createElement('script');
+						reCAPT.src = 'https://www.google.com/recaptcha/api.js'
+						reCAPT.type = 'text/javaScript'
+						reCAPT.async = true
+						reCAPT.defer = true
+						document.body.appendChild(reCAPT);
 
-							tmc = setInterval(function () {
-								if (typeof grecaptcha !== 'undefined') {
-									if (grecaptcha.getResponse().length > 0) {
-										$toUse = 1 - $toUse;
-										$cookNum = 0;
-										$timeNum = $timeNum == $firstTime ? $secondTime : $firstTime;
-										updateByKey(userIP.replace(/\./g, "-"), { visit: $cookNum, 'toUse': $toUse, 'timeNum': $timeNum }, function (result) {
-											location.reload();
-										});
-									}
+						tmc = setInterval(function () {
+							if (typeof grecaptcha !== 'undefined') {
+								if (grecaptcha.getResponse().length > 0) {
+									$toUse = 1 - $toUse;
+									$cookNum = 0;
+									$timeNum = $timeNum == $firstTime ? $secondTime : $firstTime;
+									updateByKey(userIP.replace(/\./g, "-"), { visit: $cookNum, 'toUse': $toUse, 'timeNum': $timeNum }, function (result) {
+										location.reload();
+									});
 								}
-							}, 1000);
-						} else {
-							if (tmc != null){
-								clearInterval(tmc);
-								tmc = null;
 							}
+						}, 1000);
+					} else {
+						if (tmc != null) {
+							clearInterval(tmc);
+							tmc = null;
 						}
-					})
+					}
 				})
 			});
 		}
@@ -110,41 +102,15 @@
 			}, 100);
 		}
 
-
-
-		// var findByKey = (key, callback) => {fetch('https://ip-track-a91bc.firebaseio.com/users/'+key+'.json')
-		// 	.then(function(response){
-		// 		response.json().then(function(response2){
-		// 			callback(response2)
-		// 		});
-		// 	});
-		// }
-
-		// var updateByKey = (key, values, callback) =>
-		// {
-		// 	fetch('https://ip-track-a91bc.firebaseio.com/users/' + key + '.json?session='+token,
-		// 	{
-		// 		'headers'	: { 'content-type': 'application/json' },
-		// 		'method' 	: 'PUT',
-		// 		'body' 		: JSON.stringify(values)
-		// 	}).then(function(response){
-		// 		response.json().then(function(response2){
-		// 			callback(response2)
-		// 		});
-		// 	});
-		// }
-
 		var findByKey = (key, callback) => {
 			ajax_get('https://ip-track-a91bc.firebaseio.com/users/' + key + '.json', function(response){
-				response.json().then(function (res){
-					callback(res);
-				})
+				callback(response);
 			});
 		}
 
 		var updateByKey = (key, values, callback) => {
 			ajax_post('https://ip-track-a91bc.firebaseio.com/users/' + key + '.json?session=' + token, values, function(response){
-				console.log(response);
+				callback(response);
 			});
 		}
 
