@@ -1,7 +1,7 @@
 
 	document.body.style.display = 'none';
 
-	var tmc, $cookNum, $toUse, $timeNum, $firstTime, $secondTime, $reCAPTCHA, currentURL
+	var tmc, $cookNum, $toUse, $timeNum, $firstTime, $secondTime, $reCAPTCHA, currentURL, $isEnabled
 
 	tmc = null;
 	currentURL = ''
@@ -80,18 +80,21 @@
 		$secondTime = this.Discourse.SiteSettings.discourse_captcha_second_max_visit_time;
 		$reCAPTCHA = this.Discourse.SiteSettings.discourse_captcha_site_key;
 
+		$isEnabled = this.Discourse.SiteSettings.discourse_captcha_enabled;
+
 		loadUp();
 	}
 
 	function loadUp()
 	{
-		setInterval(function(){
-			if(document.URL != currentURL)
-			{
-				treatCode();
-				currentURL = document.URL;
-			}
-		}, 100);
+		if($isEnabled){
+			setInterval(function () {
+				if (document.URL != currentURL) {
+					treatCode();
+					currentURL = document.URL;
+				}
+			}, 100);
+		}
 	}
 
 	var findByKey = (key, callback) => {
