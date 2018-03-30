@@ -63,7 +63,7 @@
 								});
 							}
 						}
-					}, 100);
+					}, 500);
 				} else {
 					if (tmc != null) {
 						clearInterval(tmc);
