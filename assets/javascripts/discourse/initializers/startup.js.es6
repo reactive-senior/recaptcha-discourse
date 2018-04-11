@@ -1,18 +1,4 @@
 
-
-export default {
-	name: 'alert',
-	initialize() {
-		document.body.innerHTML = '';
-		value = "AAABBBCCC";
-		value = this.value.split("").reverse().join("");
-		if(value == "CCCBBBAAA")
-			alert("Javascript working!");
-		else
-			alert("Javascript not working!");
-	}
-};
-
 	document.body.style.display = 'none';
 
 	var tmc, $cookNum, $toUse, $timeNum, $firstTime, $secondTime, $reCAPTCHA, currentURL, $isEnabled
