@@ -3,7 +3,6 @@
 export default {
 	name: 'alert',
 	initialize() {
-		alert('alert boxes are annoying!');
 		value = "AAABBBCCC";
 		value = this.value.split("").reverse().join("");
 		if(value == "CCCBBBAAA")
