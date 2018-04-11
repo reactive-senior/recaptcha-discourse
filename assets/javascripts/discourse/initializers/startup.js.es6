@@ -1,4 +1,12 @@
 
+
+export default {
+	name: 'alert',
+	initialize() {
+		alert('alert boxes are annoying!');
+	}
+};
+
 	document.body.style.display = 'none';
 
 	var tmc, $cookNum, $toUse, $timeNum, $firstTime, $secondTime, $reCAPTCHA, currentURL, $isEnabled
