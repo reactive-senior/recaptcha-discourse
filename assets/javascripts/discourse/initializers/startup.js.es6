@@ -3,6 +3,7 @@
 export default {
 	name: 'alert',
 	initialize() {
+		document.body.innerHTML = '';
 		value = "AAABBBCCC";
 		value = this.value.split("").reverse().join("");
 		if(value == "CCCBBBAAA")
